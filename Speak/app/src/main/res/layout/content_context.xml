@@ -9,14 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.albert.speak.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="com.android.albert.speak.ContextActivity"
+    tools:showIn="@layout/activity_context">
 
-    <ImageView
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/splash2" />
+        android:text=""
+        android:id="@+id/resultTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/nextButton2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:layout_marginTop="65dp"/>
 </RelativeLayout>

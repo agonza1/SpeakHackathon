@@ -1,42 +1,40 @@
-package com.android.albert.firstaiapiapp;
+package com.android.albert.speak;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.gson.JsonElement;
+
+import java.util.Map;
+
 import ai.api.AIConfiguration;
 import ai.api.AIListener;
 import ai.api.AIService;
 import ai.api.model.AIError;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
-import java.util.Map;
-import android.view.View;
-import com.google.gson.JsonElement;
-import android.widget.Button;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements AIListener {
-    private Button listenButton;
+public class AiActivity extends AppCompatActivity implements AIListener {
+    Button listenButton;
+    Button nextButton;
     private TextView resultTextView;
     private AIService aiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ai);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        listenButton = (Button) findViewById(R.id.listenButton);
-        resultTextView = (TextView) findViewById(R.id.resultTextView);
+        bindViews();
+        bindButtons();
 
         final AIConfiguration config = new AIConfiguration("206a3b63af1c4f66a1a311274b7b55e0",
                 AIConfiguration.SupportedLanguages.English,
@@ -69,9 +67,39 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public void listenButtonOnClick(final View view) {
-        aiService.startListening();
+    private void bindViews() {
+        resultTextView = (TextView) findViewById(R.id.resultTextView);
+        nextButton = (Button) findViewById(R.id.nextButton);
+        listenButton = (Button) findViewById(R.id.listenButton);
     }
+
+    private void bindButtons() {
+        nextButton.setOnClickListener(new StartOnClickListener());
+        listenButton.setOnClickListener(new StartOnClickListener());
+    }
+
+    public class StartOnClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()) {
+                case R.id.nextButton:
+                    Intent intent = new Intent(v.getContext(), LanguageActivity.class);
+                    Log.i("test", "Next pressed1");
+                    startActivity(intent);
+                    Log.i("test", "Next pressed2");
+                    break;
+                case R.id.listenButton:
+                    aiService.startListening();
+                    break;
+            }
+        }
+    }
+
+   /* public void listenButtonOnClick(final View view) {
+        aiService.startListening();
+    }*/
 
     @Override
     public void onResult(AIResponse aiResponse) {

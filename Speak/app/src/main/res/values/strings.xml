@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Speak!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="spinner">
+            <item>English</item>
+            <item>Spanish</item>
+            <item>Russian</item>
+    </string-array>
+    <!--Contexts Sentences Intro-->
+    <string name="intro1">...</string>
+    <string name="intro2">whatever</string>
+    <string name="intro3">..2.</string>
+    <!--Contexts Sentences Time-->
+    <string name="time1">...</string>
+    <string name="time2">whatever</string>
+    <string name="time3">..2.</string>
 </resources>
