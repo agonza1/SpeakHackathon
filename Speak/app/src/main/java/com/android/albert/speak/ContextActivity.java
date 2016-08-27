@@ -17,7 +17,8 @@ import static android.widget.ArrayAdapter.createFromResource;
  * Created by Albert on 8/27/2016.
  */
 public class ContextActivity extends AppCompatActivity {
-    private Button nextButton;
+    private Button introButton;
+    private Button timeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,11 @@ public class ContextActivity extends AppCompatActivity {
 
     }
     private void bindViews() {
-        nextButton = (Button) findViewById(R.id.nextButton2);
+        introButton = (Button) findViewById(R.id.nextButton2);
     }
 
     private void bindButtons() {
-        nextButton.setOnClickListener(new StartOnClickListener());
+        introButton.setOnClickListener(new StartOnClickListener());
     }
 
     public class StartOnClickListener implements View.OnClickListener {
@@ -43,10 +44,18 @@ public class ContextActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             switch (v.getId()) {
+
                 case R.id.nextButton2:
                     Intent intent = new Intent(v.getContext(), AiActivity.class);
+                    intent.putExtra("context", "intro");
                     startActivity(intent);
                     Log.i("test", "Next pressed!!");
+                    break;
+                case R.id.timeButton:
+                    intent = new Intent(v.getContext(), AiActivity.class);
+                    intent.putExtra("context", "time");
+                    startActivity(intent);
+                    Log.i("time", "time pressed!!");
                     break;
             }
         }

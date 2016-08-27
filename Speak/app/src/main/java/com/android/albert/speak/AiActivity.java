@@ -1,21 +1,27 @@
 package com.android.albert.speak;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 
 import java.util.Map;
 
 import ai.api.AIConfiguration;
+import ai.api.AIDataService;
 import ai.api.AIListener;
 import ai.api.AIService;
 import ai.api.model.AIError;
@@ -25,11 +31,15 @@ import ai.api.model.Result;
 public class AiActivity extends AppCompatActivity implements AIListener {
     Button listenButton;
     Button nextButton;
-    private TextView resultTextView;
+    String context;
+    private ListView mListView;
     private AIService aiService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
+        context = i.getStringExtra("context");
+        Log.i("Context","is "+i.getStringExtra("context"));
         setContentView(R.layout.activity_ai);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,13 +78,10 @@ public class AiActivity extends AppCompatActivity implements AIListener {
     }
 
     private void bindViews() {
-        resultTextView = (TextView) findViewById(R.id.resultTextView);
-        nextButton = (Button) findViewById(R.id.nextButton);
-        listenButton = (Button) findViewById(R.id.listenButton);
+        listenButton = (Button) findViewById(R.id.speakButton);
     }
 
     private void bindButtons() {
-        nextButton.setOnClickListener(new StartOnClickListener());
         listenButton.setOnClickListener(new StartOnClickListener());
     }
 
@@ -84,13 +91,8 @@ public class AiActivity extends AppCompatActivity implements AIListener {
         public void onClick(View v) {
 
             switch (v.getId()) {
-                case R.id.nextButton:
-                    Intent intent = new Intent(v.getContext(), LanguageActivity.class);
-                    Log.i("test", "Next pressed1");
-                    startActivity(intent);
-                    Log.i("test", "Next pressed2");
-                    break;
-                case R.id.listenButton:
+                case R.id.speakButton:
+                    Log.i("test", "Speak pressed2");
                     aiService.startListening();
                     break;
             }
@@ -114,14 +116,17 @@ public class AiActivity extends AppCompatActivity implements AIListener {
         }
 
         // Show results in TextView.
-        resultTextView.setText("Query:" + result.getResolvedQuery() +
+       /* resultTextView.setText("Query:" + result.getResolvedQuery() +
                 "\nAction: " + result.getAction() +
-                "\nParameters: " + parameterString);
+                "\nParameters: " + parameterString);*/
+        Log.i("aaaaaaaa",""+aiResponse.getResult());
+        Toast toast = Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
     public void onError(AIError aiError) {
-        resultTextView.setText(aiError.toString());
+      //  resultTextView.setText(aiError.toString());
     }
 
     @Override
@@ -143,4 +148,5 @@ public class AiActivity extends AppCompatActivity implements AIListener {
     public void onListeningFinished() {
 
     }
+
 }

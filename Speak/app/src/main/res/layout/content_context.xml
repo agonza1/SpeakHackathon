@@ -23,10 +23,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
+        android:text="INTRO"
         android:id="@+id/nextButton2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:layout_marginTop="65dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TIME"
+        android:id="@+id/timeButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:layout_marginTop="165dp"/>
+
 </RelativeLayout>
