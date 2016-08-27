@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Speak!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="spinner">
+            <item>English</item>
+            <item>Spanish</item>
+            <item>Russian</item>
+    </string-array>
 </resources>

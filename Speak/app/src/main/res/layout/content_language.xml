@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.android.albert.speak.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_language">
 
     <TextView
         android:layout_width="fill_parent"
@@ -23,20 +23,30 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listen"
+        android:text="Next"
         android:id="@+id/listenButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:onClick="listenButtonOnClick"
-        android:clickable="true" />
-    <Button
+        android:clickable="true"
+        android:layout_below="@+id/spinner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp" />
+
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
-        android:id="@+id/nextButton"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="nextButtonOnClick"
-        android:clickable="true"
-        android:layout_marginTop="65dp"/>
+        android:id="@+id/spinner"
+        android:layout_marginTop="29dp"
+        android:layout_alignTop="@+id/resultTextView"
+        android:layout_alignParentStart="true"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose your language"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/resultTextView"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
